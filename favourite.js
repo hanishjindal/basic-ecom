@@ -22,12 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="product-placeholder.jpg" alt="${product.name}">
           <div class="favourite-item-details">
             <h3>${product.name}</h3>
-            <p>$${product.price.toFixed(2)}</p>
+            <p>${product.price}</p>
           </div>
           <div class="favourite-item-actions">
-            <button class="remove-btn" data-product="${
-              product.name
-            }">Remove</button>
+            <button class="remove-btn" data-product="${product.name}">Remove</button>
           </div>
         `;
 

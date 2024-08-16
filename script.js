@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
   favouriteButtons.forEach((button) => {
     const productCard = button.closest(".product-card");
     const productName = productCard.querySelector("h3").textContent;
+    const productPrice = productCard.querySelector("p").textContent;
 
     // Check if the product is already in favourites
     const isFavourite = storedFavourites.some(
@@ -91,10 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (isFavourite) {
-      button.textContent = "Remove from Favourites";
+      button.textContent = "Remove from ❤️";
       button.classList.add("favourited");
     } else {
-      button.textContent = "Add to Favourites";
+      button.textContent = "Add to ❤️";
     }
 
     button.addEventListener("click", () => {
@@ -105,27 +106,21 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isFavourite) {
         // Remove from favourites
         removeFromFavourites(productName);
-        button.textContent = "Add to Favourites";
+        button.textContent = "Add to ❤️";
         button.classList.remove("favourited");
       } else {
         // Add to favourites
-        addToFavourites(productName);
-        button.textContent = "Remove from Favourites";
+        addToFavourites(productName, productPrice);
+        button.textContent = "Remove from ❤️";
         button.classList.add("favourited");
       }
     });
   });
 
   // Function to add a product to favourites
-  function addToFavourites(productName) {
-    const productIndex = storedProducts.findIndex(
-      (product) => product.name === productName
-    );
-
-    if (productIndex > -1) {
-      storedFavourites.push(storedProducts[productIndex]);
-      localStorage.setItem("favourites", JSON.stringify(storedFavourites));
-    }
+  function addToFavourites(productName, productPrice) {
+    storedFavourites.push({ name: productName, price: productPrice });
+    localStorage.setItem("favourites", JSON.stringify(storedFavourites));
   }
 
   // Function to remove a product from favourites
